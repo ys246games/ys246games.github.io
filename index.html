@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Foo Yee Sang, Unity game developer and the solo developer behind YS246 Games. Selected work and gameplay systems.">
+<title>Foo Yee Sang | Senior Unity Game Developer</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0c1018;
+  --surface: #141b28;
+  --ink: #f4f7fc;
+  --muted: #b5c0d1;
+  --line: #2b374a;
+  --accent: #a5e9fa;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 1rem/1.65 system-ui, sans-serif; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { line-height: 1.04; letter-spacing: -.055em; }
+.wrap { width: min(1200px, calc(100% - 4rem)); margin-inline: auto; }
+.bar { display: flex; min-height: 74px; align-items: center; justify-content: space-between; gap: 1rem; }
+header { border-bottom: 1px solid var(--line); }
+.brand { display: inline-flex; align-items: center; gap: .7rem; font-weight: 750; }
+.monogram { display: grid; place-items: center; width: 2.1rem; aspect-ratio: 1; border-radius: .55rem; background: var(--accent); color: #11212b; font-size: .76rem; }
+nav { display: flex; gap: clamp(1rem, 4vw, 2rem); }
+nav a, footer { color: var(--muted); }
+nav a:hover, footer a:hover { color: var(--ink); }
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: 1.5rem 0 clamp(3.5rem, 8vw, 6rem);
+  border: 1px solid var(--line);
+  border-radius: 1.3rem;
+  background: #141c2a;
+  padding: clamp(1.65rem, 5vw, 5rem);
+}
+.hero-art { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 54%; }
+.hero::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, #101725 5%, #101725ed 36%, #10172535 100%), linear-gradient(0deg,#101725b3,transparent 60%); }
+.eyebrow, .section-label { color: var(--accent); font: 700 .76rem/1.45 ui-monospace, monospace; letter-spacing: .09em; text-transform: uppercase; }
+h1 { margin-top: .65rem; font-size: clamp(2.9rem, 8vw, 7rem); }
+.role { margin: .55rem 0 1rem; font-size: clamp(1.25rem, 3vw, 2rem); font-weight: 650; }
+.lede { max-width: 46ch; color: #d3deed; }
+.action { display: inline-flex; align-items: center; padding: .6rem .95rem; border: 1px solid #45546a; border-radius: .55rem; font-size: .9rem; font-weight: 700; }
+.action:hover { border-color: var(--accent); color: var(--accent); }
+.action.primary { background: var(--accent); border-color: var(--accent); color: #11212b; }
+.action.primary:hover { background: #d1f6ff; }
+.hero .action { margin-top: 1.45rem; }
+.work-head { display: flex; align-items: end; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--line); padding-bottom: 1rem; margin-bottom: 1.4rem; }
+.section-title { font-size: clamp(2rem, 5vw, 3.65rem); margin-top: .3rem; }
+.project { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); gap: 1rem; padding: clamp(.8rem, 2vw, 1.35rem); margin-bottom: 1.35rem; border: 1px solid var(--line); border-radius: 1.15rem; background: var(--surface); }
+.project > figure { align-self: center; }
+figure { margin: 0; min-width: 0; border: 1px solid var(--line); border-radius: .75rem; overflow: hidden; background: #101622; }
+figure a { display: block; overflow: hidden; }
+figure a:focus-visible { outline-offset: -4px; }
+figure img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; transition: scale .2s ease; }
+figure a:hover img { scale: 1.035; }
+.details { padding: clamp(.4rem, 1.65vw, 1.15rem); }
+h3 { font-size: clamp(1.7rem, 3.35vw, 3rem); margin: .55rem 0 .7rem; }
+.description, .about p { color: var(--muted); }
+ul { padding-inline-start: 1.1rem; margin: .9rem 0 0; font-size: .93rem; }
+li + li { margin-top: .42rem; }
+li::marker { color: var(--accent); }
+.recognition { color: var(--accent); font-size: .88rem; font-weight: 700; margin-top: .95rem; }
+.project-links { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1.05rem; }
+.screenshots { grid-column: 1/-1; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .7rem; }
+.more-projects { margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+.about { padding: clamp(1.35rem, 4vw, 3rem); margin: clamp(3rem, 7vw, 5rem) 0; background: var(--surface); border: 1px solid var(--line); border-radius: 1.15rem; }
+.about p { max-width: 66ch; margin-top: .9rem; }
+.stack { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1rem; }
+.stack span { border: 1px solid #45546a; border-radius: 100px; padding: .18rem .65rem; font-size: .82rem; }
+footer { border-top: 1px solid var(--line); font-size: .86rem; }
+@media (max-width: 760px) {
+  .wrap { width: calc(100% - 1.75rem); }
+  .project { grid-template-columns: minmax(0,1fr); }
+  .hero { padding-top: 8rem; }
+  .hero-art { height: 72%; }
+  .hero::after { background: linear-gradient(0deg,#101725 38%,#101725e6 55%,#10172510 100%); }
+}
+@media (max-width: 420px) {
+  .screenshots { gap: .35rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  figure img { transition: none; }
+  figure a:hover img { scale: 1; }
+}
+.technical { margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+.technical-intro { margin-bottom: 1.2rem; }
+.experiment-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.experiment { display: flex; flex-direction: column; min-width: 0; gap: 1rem; padding: clamp(.85rem, 2vw, 1.35rem); border: 1px solid var(--line); border-radius: 1.15rem; background: var(--surface); }
+.experiment h3 { font-size: clamp(1.4rem, 2.8vw, 2.15rem); line-height: 1.12; }
+.experiment-video, .lighting-gallery {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+.experiment-video { display: block; object-fit: contain; border-radius: .6rem; background: #101622; }
+.lighting-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: .55rem;
+}
+.lighting-gallery a {
+  position: relative;
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: .6rem;
+}
+.lighting-gallery img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 760px) {
+  .experiment-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) {
+  header .bar { flex-wrap: wrap; justify-content: flex-start; padding-block: .7rem; gap: .55rem 1rem; }
+}
+.contact { margin-top: calc(-1 * clamp(1.6rem, 4vw, 3.5rem)); }
+.contact-links { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1rem; }
+.contact-links a { max-width: 100%; overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+.image-preview { box-sizing: border-box; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 3.5rem 1rem 1rem; border: 0; background: transparent; }
+.image-preview[open] { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; gap: clamp(.2rem, 1vw, .75rem); place-items: center; }
+.image-preview::backdrop { background: rgba(6, 9, 15, .92); }
+.image-preview img { display: block; max-width: 100%; max-height: calc(100dvh - 4.5rem); width: auto; height: auto; object-fit: contain; }
+.image-preview .preview-close { position: absolute; top: 1rem; right: 1rem; min-height: 44px; cursor: pointer; background: var(--surface); color: var(--ink); }
+.image-preview .preview-arrow { width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border-radius: 50%; cursor: pointer; background: var(--surface); color: var(--ink); font-size: 1.65rem; line-height: 1; }
+.image-preview .preview-arrow[hidden] { display: none; }
+.preview-prev { grid-area: 1 / 1; }
+.image-preview img { grid-area: 1 / 2; }
+.preview-next { grid-area: 1 / 3; }
+@media (max-width: 540px) {
+  .image-preview[open] { grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 0; padding-inline: .4rem; }
+  .image-preview img { grid-column: 1 / -1; }
+  .image-preview .preview-arrow { z-index: 1; }
+}
+</style>
+</head>
+<body>
+<header id="top">
+  <div class="wrap bar">
+    <a class="brand" href="#top"><span class="monogram" aria-hidden="true">YS</span>YS246 Games</a>
+    <nav aria-label="Main navigation"><a href="#work">Projects</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  </div>
+</header>
+<main class="wrap">
+  <section class="hero" aria-labelledby="name">
+    <img class="hero-art" src="images/soulcery-hero-cover.webp" width="1893" height="1065" alt="" fetchpriority="high">
+    <p class="eyebrow">Game development portfolio · Malaysia</p>
+    <h1 id="name">Foo Yee Sang</h1>
+    <p class="role">Senior Unity Game Developer</p>
+    <p class="lede">Over eight years of professional experience with Unity and C#. I specialize in designing modular gameplay architecture, building responsive combat systems, and refining game feel.</p>
+    <a class="action primary" href="#work">View featured projects ↓</a>
+  </section>
+  <section id="work" aria-labelledby="work-heading">
+    <div class="work-head">
+      <div><p class="section-label">Selected work</p><h2 class="section-title" id="work-heading">Featured projects</h2></div>
+    </div>
+    <article class="project with-gallery" id="soulcery">
+      <figure><a data-image-preview href="./images/soulcery-combat.webp" aria-label="Open full-size screenshot: Combat and deckbuilding"><img src="./images/soulcery-combat.webp" width="1920" height="1080" alt="Fire slash in an isometric dungeon, with equipped spell cards below"></a></figure>
+      <div class="details">
+        <p class="eyebrow">01 / Featured project · Developed Solo</p>
+        <h3>Soulcery: Deck of Shadows</h3>
+        <p class="description">I designed and developed a fast-paced hack-and-slash action roguelike where players steal enemy abilities, build a deck, and chain spells with zero cooldowns.</p>
+        <ul>
+          <li>Architected scalable combat and progression systems around deck-based abilities.</li>
+          <li>Designed and implemented 100 unique spells, refining their visual effects, timing, and feedback so each one feels satisfying to cast.</li>
+          <li>Refined input handling and transitions between spells to keep fast combos fluid and responsive.</li>
+          <li>Took the project from the initial combat prototype to preparing the build for Steam release.</li>
+        </ul>
+        <p class="recognition">Top 40 Finalist · SEA Game Awards 2026</p>
+        <div class="project-links">
+          <a class="action" target="_blank" rel="noopener noreferrer" href="https://store.steampowered.com/app/3856480/Soulcery_Deck_of_Shadows/">View on Steam ↗</a>
+          <a class="action primary" target="_blank" rel="noopener noreferrer" href="https://youtu.be/e9loEdvNWLg">Watch Trailer ↗</a>
+        </div>
+      </div>
+      <div class="screenshots" aria-label="More Soulcery screenshots">
+        <figure><a data-image-preview href="./images/soulcery-zero-cooldown.webp" aria-label="Open full-size screenshot: Zero-cooldown combat"><img src="./images/soulcery-zero-cooldown.webp" width="1920" height="1080" alt="A green poison strike hits a large enemy" loading="lazy"></a></figure>
+        <figure><a data-image-preview href="./images/soulcery-playstyles.webp" aria-label="Open full-size screenshot: Four ways to draw cards"><img src="./images/soulcery-playstyles.webp" width="1920" height="1080" alt="Lightning and wind spells overlap during a fight on a lava bridge" loading="lazy"></a></figure>
+        <figure><a data-image-preview href="./images/soulcery-absorb.webp" aria-label="Open full-size screenshot: Stealing enemy abilities"><img src="./images/soulcery-absorb.webp" width="1920" height="1080" alt="The player absorbs power from a defeated lava creature" loading="lazy"></a></figure>
+      </div>
+    </article>
+    <article class="project with-gallery" id="tescaris">
+      <figure><a data-image-preview href="images/tescaris-1.webp" aria-label="Open full-size screenshot: Isometric puzzle board"><img src="images/tescaris-1.webp" width="1920" height="1080" alt="Pastel blocks and three selectable cards on an isometric puzzle board" loading="lazy"></a></figure>
+      <div class="details">
+        <p class="eyebrow">02 / Featured project · Developed Solo</p>
+        <h3>Tescaris</h3>
+        <p class="description">I designed, developed, and published a casual puzzle game where players use cards to create blocks and fill the board.</p>
+        <ul>
+          <li>Designed the original puzzle mechanics and expanded the game jam prototype into a Steam release with 120 levels.</li>
+          <li>Integrated Steamworks and built Daily Puzzle mode with a daily leaderboard.</li>
+          <li>Used minimal visual assets to prototype quickly and refined block placement and feedback for the Steam release.</li>
+        </ul>
+        <p class="recognition">Top 2% (#157 / 7,637) in itch.io’s biggest game jam - GMTK Game Jam (2024) (32,000+ participants)</p>
+        <div class="project-links">
+          <a class="action" target="_blank" rel="noopener noreferrer" href="https://store.steampowered.com/app/3201880/">View on Steam ↗</a>
+        </div>
+      </div>
+      <div class="screenshots" aria-label="More Tescaris screenshots">
+        <figure><a data-image-preview href="images/tescaris-2.webp" aria-label="Open full-size screenshot: Card selection"><img src="images/tescaris-2.webp" width="1920" height="1080" alt="A selected card previews a red block shape on a top-down board" loading="lazy"></a></figure>
+        <figure><a data-image-preview href="images/tescaris-3.webp" aria-label="Open full-size screenshot: Directional blocks"><img src="images/tescaris-3.webp" width="1920" height="1080" alt="A top-down puzzle board with directional arrows on the blocks and cards" loading="lazy"></a></figure>
+        <figure><a data-image-preview href="images/tescaris-4.webp" aria-label="Open full-size screenshot: Completed puzzle"><img src="images/tescaris-4.webp" width="1598" height="899" alt="An isometric board completely filled with colorful blocks" loading="lazy"></a></figure>
+      </div>
+    </article>
+    <article class="project with-gallery" id="pvp-arena">
+      <figure><a data-image-preview href="images/pvp-arena-1.webp" aria-label="Open full-size screenshot: Real-time combat"><img src="images/pvp-arena-1.webp" width="2048" height="1078" alt="Two players clash as a lightning strike hits in an isometric arena" loading="lazy"></a></figure>
+      <div class="details">
+        <p class="eyebrow">03 / Featured project · Developed Solo</p>
+        <h3>Real-Time 3v3 PvP Combat Arena</h3>
+        <p class="description">I built the multiplayer foundation for a real-time team combat game using Photon Fusion and PlayFab-hosted dedicated servers.</p>
+        <ul>
+          <li>Implemented responsive combat networking with client-side prediction, server reconciliation, lag compensation, interpolation, and extrapolation.</li>
+          <li>Designed server lifecycle and matchmaking systems with standby server allocation, dynamic matchmaking rules, and bots to fill empty slots.</li>
+          <li>Built Deathmatch, Zone Capture, and Gem Grab, along with progression systems and bot behaviors tailored to each mode.</li>
+        </ul>
+        <div class="project-links">
+          <a class="action" target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1fJjAgut2jUiNS3Uz05CmzJb2arOZmG9x/view?usp=sharing">Download Reskinned Demo ↗</a>
+        </div>
+      </div>
+      <div class="screenshots" aria-label="More Real-Time 3v3 PvP Combat Arena screenshots">
+        <figure><a data-image-preview href="images/pvp-arena-2.webp" aria-label="Open full-size screenshot: 3v3 team lobby"><img src="images/pvp-arena-2.webp" width="1920" height="1009" alt="Team lobby showing three slots per team and character selection" loading="lazy"></a></figure>
+        <figure><a data-image-preview href="images/pvp-arena-3.webp" aria-label="Open full-size screenshot: Gem Grab combat"><img src="images/pvp-arena-3.webp" width="2048" height="1078" alt="Two players fight near a gem pickup while the team score is visible" loading="lazy"></a></figure>
+        <figure><a data-image-preview href="images/pvp-arena-4.webp" aria-label="Open full-size screenshot: Ranged abilities"><img src="images/pvp-arena-4.webp" width="2048" height="1078" alt="A player launches a fire projectile at an opponent across the arena" loading="lazy"></a></figure>
+      </div>
+    </article>
+  </section>
+  <section class="more-projects" id="more-projects" aria-labelledby="more-heading">
+    <div class="work-head">
+      <h2 class="section-title" id="more-heading">More projects</h2>
+    </div>
+    <article class="project with-gallery" id="ejen-ali">
+      <figure><a data-image-preview href="images/ejen-ali-1.webp" aria-label="Open full-size screenshot: 3v3 mobile PvP"><img src="images/ejen-ali-1.webp" width="1185" height="666" alt="Promotional screenshot showing a 3v3 match and a playable agent" loading="lazy"></a></figure>
+      <div class="details">
+        <p class="eyebrow">04 / Team Project · Unity Developer</p>
+        <h3>Ejen Ali: Agents’ Arena</h3>
+        <p class="description">A real-time 3v3 mobile PvP game with 900K+ downloads across Google Play and the App Store.</p>
+        <ul>
+          <li>Developed bots for competitive matchmaking and simulation modes using a hybrid of finite state machines and behavior trees.</li>
+          <li>Built esports features, including GM-controlled custom rooms and spectator tools.</li>
+          <li>Implemented three new playable characters and integrated them into the combat system.</li>
+        </ul>
+        <p class="recognition">2020 SEA Game Awards Nominee</p>
+        <div class="project-links">
+          <a class="action" target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=msagJpRyDTU">First Official Esports Competition ↗</a>
+          <a class="action" target="_blank" rel="noopener noreferrer" href="https://play.google.com/store/apps/details?id=com.commonextract.agentsarena">Google Play ↗</a>
+        </div>
+      </div>
+      <div class="screenshots" aria-label="Additional project screenshots">
+        <figure><a data-image-preview href="images/ejen-ali-2.webp" aria-label="Open full-size screenshot: Objective-based combat"><img src="images/ejen-ali-2.webp" width="1920" height="864" alt="Agents and bots contest an objective marked on the minimap" loading="lazy"></a></figure>
+        <figure><a data-image-preview href="images/ejen-ali-3.webp" aria-label="Open full-size screenshot: Ranged abilities"><img src="images/ejen-ali-3.webp" width="1920" height="864" alt="An agent fires an energy beam across the capture zone" loading="lazy"></a></figure>
+        <figure><a data-image-preview href="images/ejen-ali-4.webp" aria-label="Open full-size screenshot: Team fight"><img src="images/ejen-ali-4.webp" width="1920" height="864" alt="Multiple agents fight inside a capture zone" loading="lazy"></a></figure>
+      </div>
+    </article>
+    <article class="project with-gallery" id="tactical-deckbuilding">
+      <figure><a data-image-preview href="images/tactical-deckbuilding-1.webp" aria-label="Open full-size screenshot: Grid-based combat"><img src="images/tactical-deckbuilding-1.webp" width="1920" height="1080" alt="Highlighted movement tiles on an isometric battlefield" loading="lazy"></a></figure>
+      <div class="details">
+        <p class="eyebrow">05 / Developed Solo</p>
+        <h3>Tactical Deckbuilding Roguelike</h3>
+        <p class="description">A turn-based tactical roguelike where players fight on a grid and build their deck by stealing abilities from defeated enemies.</p>
+        <ul>
+          <li>Built a modular card framework supporting 60+ unique cards and 80+ ability variations.</li>
+          <li>Implemented a progression system that lets players add abilities from defeated enemies to their deck as a run progresses.</li>
+          <li>Designed the full game flow, built the level systems, and created combat encounters.</li>
+          <li>Implemented grid-based enemy pathfinding and attack indicators that show players where enemies will strike before they commit to a move.</li>
+        </ul>
+        <div class="project-links"><a class="action" target="_blank" rel="noopener noreferrer" href="https://drive.google.com/drive/folders/1ZfRt6tev8ehhajvpcucX0TRQ2G0BZaOd?usp=sharing">Download Demo ↗</a></div>
+      </div>
+      <div class="screenshots" aria-label="Additional project screenshots">
+        <figure><a data-image-preview href="images/tactical-deckbuilding-2.webp" aria-label="Open full-size screenshot: Card-based attacks"><img src="images/tactical-deckbuilding-2.webp" width="1920" height="1080" alt="A Fire Dragon attacks a nearby enemy on the grid" loading="lazy"></a></figure>
+        <figure><a data-image-preview href="images/tactical-deckbuilding-3.webp" aria-label="Open full-size screenshot: Multi-target abilities"><img src="images/tactical-deckbuilding-3.webp" width="1920" height="1080" alt="Lightning strikes several enemies while the card hand is visible" loading="lazy"></a></figure>
+        <figure><a data-image-preview href="images/tactical-deckbuilding-4.webp" aria-label="Open full-size screenshot: Area attacks"><img src="images/tactical-deckbuilding-4.webp" width="1920" height="1080" alt="A large explosion covers several tiles of the battlefield" loading="lazy"></a></figure>
+      </div>
+    </article>
+    <article class="project with-gallery" id="save-me-coop">
+      <figure><a data-image-preview href="images/save-me-coop-1.webp" aria-label="Open full-size screenshot: Co-op obstacle course"><img src="images/save-me-coop-1.webp" width="1848" height="1080" alt="Three players move around a large spinning obstacle" loading="lazy"></a></figure>
+      <div class="details">
+        <p class="eyebrow">06 / Developed Solo</p>
+        <h3>Save Me and Die Together</h3>
+        <p class="description">A real-time co-op game for 2–4 players.</p>
+        <ul>
+          <li>Implemented real-time multiplayer with Photon Fusion.</li>
+          <li>Built a modular customization system that lets players mix and match character parts.</li>
+        </ul>
+      </div>
+      <div class="screenshots" aria-label="Additional Save Me and Die Together screenshots">
+        <figure><a data-image-preview href="images/save-me-coop-2.webp" aria-label="Open full-size screenshot: Cannon hazards"><img src="images/save-me-coop-2.webp" width="1848" height="1080" alt="Players navigate a lane lined with red cannons" loading="lazy"></a></figure>
+        <figure><a data-image-preview href="images/save-me-coop-3.webp" aria-label="Open full-size screenshot: Character combinations"><img src="images/save-me-coop-3.webp" width="1848" height="1080" alt="Three characters with different combinations of parts gather near a hazard" loading="lazy"></a></figure>
+        <figure><a data-image-preview href="images/save-me-coop-4.webp" aria-label="Open full-size screenshot: Stage obstacles"><img src="images/save-me-coop-4.webp" width="1848" height="1080" alt="Players move past a barrier, explosives, and a turret" loading="lazy"></a></figure>
+      </div>
+    </article>
+  </section>
+  <section class="technical" id="experiments" aria-labelledby="experiments-heading">
+    <div class="work-head">
+      <div>
+        <p class="eyebrow">07 / Developed Solo</p>
+        <h2 class="section-title" id="experiments-heading">Unity Technical Experiments</h2>
+      </div>
+    </div>
+    <p class="description technical-intro">A collection of Unity experiments in lighting, mobile UI rendering, physics simulation, and view-dependent effects.</p>
+    <div class="experiment-grid">
+      <article class="experiment">
+        <div class="experiment-copy">
+          <p class="eyebrow">Experiment A</p>
+          <h3>HDRP Atmospheric Dungeon Lighting</h3>
+          <p class="description">Used volumetric lighting, emissive materials, and post-processing in Unity HDRP to create a cinematic dungeon atmosphere.</p>
+        </div>
+        <div class="lighting-gallery"><a data-image-preview href="images/hdrp-dungeon-1.webp" aria-label="Glowing tree framed by golden rings and torchlight"><img src="images/hdrp-dungeon-1.webp" width="1612" height="907" alt="Glowing tree framed by golden rings and torchlight" loading="lazy"></a>
+          <a data-image-preview href="images/hdrp-dungeon-2.webp" aria-label="Dungeon hall with blue emissive details and warm torchlight"><img src="images/hdrp-dungeon-2.webp" width="1612" height="907" alt="Dungeon hall with blue emissive details and warm torchlight" loading="lazy"></a>
+          <a data-image-preview href="images/hdrp-dungeon-3.webp" aria-label="Golden tree and torchlit walkway against blue volumetric fog"><img src="images/hdrp-dungeon-3.webp" width="1612" height="907" alt="Golden tree and torchlit walkway against blue volumetric fog" loading="lazy"></a>
+          <a data-image-preview href="images/hdrp-dungeon-4.webp" aria-label="Ornate dungeon doorway lit by cool blue light and warm torches"><img src="images/hdrp-dungeon-4.webp" width="1612" height="907" alt="Ornate dungeon doorway lit by cool blue light and warm torches" loading="lazy"></a></div>
+      </article>
+      <article class="experiment">
+        <div class="experiment-copy">
+          <p class="eyebrow">Experiment B</p>
+          <h3>Mobile-Optimized UI Background Blur</h3>
+          <p class="description">Reuses cached blur textures across multiple UI layers to reduce repeated blur passes on mobile.</p>
+        </div>
+        <video class="experiment-video" controls playsinline preload="none" poster="images/ui-background-blur-poster.webp" aria-label="Mobile UI blur demo">
+          <source src="videos/ui-background-blur.mp4" type="video/mp4">
+          <a href="videos/ui-background-blur.mp4" target="_blank" rel="noopener noreferrer">Open demo video</a>
+        </video>
+      </article>
+      <article class="experiment">
+        <div class="experiment-copy">
+          <p class="eyebrow">Experiment C</p>
+          <h3>Physics-Based Dice with Controlled Outcomes</h3>
+          <p class="description">Simulates each throw with rigidbody physics while letting the game specify the final face. The dice still roll and collide naturally.</p>
+        </div>
+        <video class="experiment-video" controls playsinline preload="none" poster="images/physics-dice-poster.webp" aria-label="Physics-based dice demo">
+          <source src="videos/physics-dice.mp4" type="video/mp4">
+          <a href="videos/physics-dice.mp4" target="_blank" rel="noopener noreferrer">Open demo video</a>
+        </video>
+      </article>
+      <article class="experiment">
+        <div class="experiment-copy">
+          <p class="eyebrow">Experiment D</p>
+          <h3>View-Dependent Holographic Card Effect</h3>
+          <p class="description">Simulates holographic foil with highlights and color shifts that change with the camera angle.</p>
+        </div>
+        <video class="experiment-video" controls playsinline preload="none" poster="images/holographic-card-poster.webp" aria-label="Holographic card demo">
+          <source src="videos/holographic-card.mp4" type="video/mp4">
+          <a href="videos/holographic-card.mp4" target="_blank" rel="noopener noreferrer">Open demo video</a>
+        </video>
+      </article>
+    </div>
+  </section>
+  <section class="about" id="about" aria-labelledby="about-heading">
+    <h2 class="section-title" id="about-heading">About me</h2>
+    <p>I’m a senior Unity game developer with over eight years of professional experience in Unity and C#. I specialize in designing modular gameplay architecture, building responsive combat systems, and refining game feel.</p>
+    <div class="stack" aria-label="Technical skills"><span>Unity</span><span>C#</span><span>Indie Dev</span><span>Game Feel</span><span>Code Architecture</span><span>Combat System</span><span>Card System</span><span>Multiplayer Networking</span><span>Steamworks</span></div>
+  </section>
+  <section class="about contact" id="contact" aria-labelledby="contact-heading">
+    <h2 class="section-title" id="contact-heading">Contact</h2>
+    <div class="contact-links">
+      <a class="action" href="mailto:foo.yee.sang@gmail.com">Email · foo.yee.sang@gmail.com</a>
+      <a class="action" href="tel:+60167992880">Phone · +60-167992880</a>
+      <a class="action primary" href="https://drive.google.com/file/d/13k9ldM07SfObqbpOhttQW5DzNmlDb69C/view?usp=sharing" target="_blank" rel="noopener noreferrer">View Resume ↗</a>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap bar"><span>Foo Yee Sang · YS246 Games</span><a href="#top">Back to top ↑</a></div></footer>
+  <dialog class="image-preview" aria-label="Full screenshot preview">
+    <button class="action preview-close" type="button" autofocus>Close ×</button>
+    <button class="action preview-arrow preview-prev" type="button" aria-label="Previous screenshot">‹</button>
+    <img alt="">
+    <button class="action preview-arrow preview-next" type="button" aria-label="Next screenshot">›</button>
+  </dialog>
+  <script>
+const preview = document.querySelector('.image-preview');
+const previewImage = preview.querySelector('img');
+const previous = preview.querySelector('.preview-prev');
+const next = preview.querySelector('.preview-next');
+let screenshots = [];
+let current = 0;
+
+function showScreenshot(index) {
+  current = (index + screenshots.length) % screenshots.length;
+  const link = screenshots[current];
+  previewImage.alt = link.querySelector('img').alt;
+  previewImage.src = link.href;
+}
+
+if (typeof preview.showModal === 'function') {
+  for (const link of document.querySelectorAll('[data-image-preview]')) {
+    link.setAttribute('aria-haspopup', 'dialog');
+    link.addEventListener('click', (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      screenshots = Array.from(link.closest('article').querySelectorAll('[data-image-preview]'));
+      previous.hidden = next.hidden = screenshots.length < 2;
+      showScreenshot(screenshots.indexOf(link));
+      preview.showModal();
+    });
+  }
+
+  previous.addEventListener('click', () => showScreenshot(current - 1));
+  next.addEventListener('click', () => showScreenshot(current + 1));
+  preview.addEventListener('keydown', (event) => {
+    if (screenshots.length < 2 || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+    event.preventDefault();
+    showScreenshot(current + (event.key === 'ArrowLeft' ? -1 : 1));
+  });
+  preview.querySelector('.preview-close').addEventListener('click', () => preview.close());
+  preview.addEventListener('click', (event) => {
+    if (event.target === preview) preview.close();
+  });
+  preview.addEventListener('close', () => previewImage.removeAttribute('src'));
+}
+  </script>
+</body>
+</html>
